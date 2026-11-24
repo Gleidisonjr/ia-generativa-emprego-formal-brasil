@@ -14,6 +14,26 @@ Trabalho da disciplina *Metodologia e Técnicas de Pesquisa em Economia II* (Ci�
 | Ver tudo no Excel, em um único arquivo | [`base_dados.xlsx`](https://github.com/Gleidisonjr/ia-generativa-emprego-formal-brasil/raw/main/base_dados.xlsx) (clique em *Download raw file*) |
 | Ler o trabalho | `docs__trabalho.pdf` |
 
+## Como fica
+
+**Google Colab:** abre sem instalar nada, carrega a base sozinho e tem menus para explorar.
+
+![Abertura do caderno no Colab](prints__colab_1_abertura.png)
+
+![Visão geral do Brasil](prints__colab_2_visao_brasil.png)
+
+![Ranking dos estados](prints__colab_3_ranking_estados.png)
+
+![Olhando um estado de perto (Mato Grosso)](prints__colab_4_estado_mt.png)
+
+**Excel:** todas as tabelas em um arquivo, com filtros (aba Estados abaixo).
+
+![Aba Estados da planilha](prints__excel_aba_estados.png)
+
+**BigQuery:** os empregos vêm da tabela de vínculos da RAIS na Base dos Dados, consultada com SQL (arquivos `sql__`).
+
+![Tabela de vínculos da RAIS no BigQuery](prints__bigquery_esquema_rais.png)
+
 ### O que tem no Excel (`base_dados.xlsx`)
 
 Uma aba por tabela, com filtros e primeira linha fixa. A aba *LEIA-ME* explica cada uma.
