@@ -1,0 +1,40 @@
+import pandas as pd, numpy as np, matplotlib as mpl, matplotlib.pyplot as plt
+mpl.rcParams['font.family']='Liberation Serif'
+d=pd.read_csv('cnae/cnae_fechado.csv'); d=d[d.uf!='IGNORADO']
+nat=d.groupby('sec')[['mp','s14']].sum(); nat['e']=nat.s14/nat.mp; nat['w']=nat.mp/nat.mp.sum()
+pBR=100*nat.s14.sum()/nat.mp.sum()
+rows=[]
+for u,g in d.groupby('uf'):
+    g=g.set_index('sec').reindex(nat.index).fillna(0)
+    w=g.mp/g.mp.sum(); e=np.where(g.mp>0,g.s14/g.mp.replace(0,np.nan),nat.e).astype(float); e=pd.Series(e,index=g.index).fillna(nat.e)
+    comp=((w-nat.w)*nat.e).sum()*100; within=(w*(e-nat.e)).sum()*100
+    p=100*(w*e).sum(); rows.append((u,p,p-pBR,comp,within))
+r=pd.DataFrame(rows,columns=['uf','p','delta','comp','within']).set_index('uf')
+assert np.allclose(r.comp+r.within,r.delta)
+r=r.sort_values('delta'); print(r.round(2).to_string())
+# parcela explicada (soma dos quadrados) 
+print('share of variance: comp %.2f within %.2f cov %.2f'%((r.comp**2).sum()/(r.delta**2).sum(),(r.within**2).sum()/(r.delta**2).sum(),2*(r.comp*r.within).sum()/(r.delta**2).sum()))
+print('corr comp,delta %.2f ; within,delta %.2f ; comp-within corr %.2f'%(np.corrcoef(r.comp,r.delta)[0,1],np.corrcoef(r.within,r.delta)[0,1],np.corrcoef(r.comp,r.within)[0,1]))
+r.to_csv('decomp_uf.csv')
+fig,ax=plt.subplots(figsize=(7.2,5.2),dpi=300)
+y=np.arange(len(r))
+c1,c2='#12385e','#d98c2b'
+pos_c=np.where(r.comp>=0,r.comp,0); neg_c=np.where(r.comp<0,r.comp,0)
+pos_w=np.where(r.within>=0,r.within,0); neg_w=np.where(r.within<0,r.within,0)
+ax.barh(y,pos_c,color=c1,height=0.7,label='Setores em que o estado emprega (composição)')
+ax.barh(y,neg_c,color=c1,height=0.7)
+ax.barh(y,pos_w,left=pos_c,color=c2,height=0.7,label='Tipos de ocupação dentro de cada setor')
+ax.barh(y,neg_w,left=neg_c,color=c2,height=0.7)
+ax.scatter(r.delta,y,color='white',edgecolor='black',s=14,zorder=4,linewidth=0.8,label='Diferença total em relação ao Brasil')
+ax.axvline(0,color='black',lw=0.6)
+ax.set_yticks(y); ax.set_yticklabels(r.index,fontsize=6.8)
+ax.tick_params(axis='x',labelsize=6.8)
+ax.set_xlabel('pontos percentuais em relação à média do Brasil (35,2%)',fontsize=7)
+ax.grid(axis='x',color='#e5e5e5',lw=0.5); ax.set_axisbelow(True)
+for s in ['top','right','left']: ax.spines[s].set_visible(False)
+ax.legend(fontsize=6.5,frameon=False,loc='lower right')
+fig.text(0.01,0.985,'A exposição de um estado vem do setor em que ele emprega ou do tipo de ocupação dentro dos setores?',fontsize=9.3,fontweight='bold',va='top')
+fig.text(0.01,0.945,'Diferença de cada estado em relação à média nacional, dividida em duas partes que somam exatamente o total (círculo). Em MS, MT e AL pesa o setor;\nem PB e PI, o tipo de ocupação; no DF, os dois. No conjunto dos estados, a ocupação explica 54% da variação e o setor, 39% (7% é interação).',fontsize=6.6,va='top',color='#333',linespacing=1.25)
+fig.text(0.01,0.008,'Fonte: elaboração própria com dados de RAIS 2025 (Bartkevihi, 2026) e OIT (Gmyrek et al., 2025). Decomposição exata em 21 seções da CNAE 2.0, pesos nacionais.',fontsize=5.3,color='#555')
+plt.subplots_adjust(left=0.07,right=0.97,top=0.86,bottom=0.105)
+fig.savefig('/home/claude/out/fig5.png')
