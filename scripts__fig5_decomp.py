@@ -37,4 +37,4 @@ fig.text(0.01,0.985,'A exposição de um estado vem do setor em que ele emprega 
 fig.text(0.01,0.945,'Diferença de cada estado em relação à média nacional, dividida em duas partes que somam exatamente o total (círculo). Em MS, MT e AL pesa o setor;\nem PB e PI, o tipo de ocupação; no DF, os dois. No conjunto dos estados, a ocupação explica 54% da variação e o setor, 39% (7% é interação).',fontsize=6.6,va='top',color='#333',linespacing=1.25)
 fig.text(0.01,0.008,'Fonte: elaboração própria com dados de RAIS 2025 (Bartkevihi, 2026) e OIT (Gmyrek et al., 2025). Decomposição exata em 21 seções da CNAE 2.0, pesos nacionais.',fontsize=5.3,color='#555')
 plt.subplots_adjust(left=0.07,right=0.97,top=0.86,bottom=0.105)
-fig.savefig('/home/claude/out/fig5.png')
+fig.savefig('saida/fig5.png')

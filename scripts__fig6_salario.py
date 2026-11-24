@@ -37,4 +37,4 @@ fig.text(0.01,0.985,'Quem está mais exposto à IA generativa: quem ganha menos 
 fig.text(0.01,0.935,'No Brasil, ocupações expostas pagam em média o mesmo que as demais (R\\$ 4.090 vs. R\\$ 4.098), e a exposição não cresce nem cai com a faixa salarial.\nDentro dos estados o quadro é misto: em 24 dos 27 pagam menos (até -26% em RR, PI e AP); só em SP, SC e DF pagam mais.',fontsize=6.5,va='top',color='#333',linespacing=1.25)
 fig.text(0.01,0.008,'Fonte: elaboração própria com dados de RAIS 2025 (Bartkevihi, 2026) e OIT (Gmyrek et al., 2025). Faixas calculadas sobre a remuneração média de cada ocupação por estado; vínculos mapeados.',fontsize=5.1,color='#555')
 plt.subplots_adjust(left=0.07,right=0.99,top=0.80,bottom=0.17,wspace=0.28)
-fig.savefig('/home/claude/out/fig6.png')
+fig.savefig('saida/fig6.png')

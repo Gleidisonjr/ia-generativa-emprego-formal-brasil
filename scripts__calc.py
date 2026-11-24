@@ -1,5 +1,5 @@
 import pandas as pd, pyreadr, numpy as np
-P='/home/claude/data/ocupacoesBR/data/'
+P='dados_brutos/ocupacoesBR/data/'
 def rd(n):
     r=pyreadr.read_r(P+n+'.rda'); return r[list(r)[0]]
 c88=rd('cbo2002_isco88'); esc=rd('cbo2002_escada'); i88=rd('isco88_isco08'); i08_88=rd('isco08_isco88')

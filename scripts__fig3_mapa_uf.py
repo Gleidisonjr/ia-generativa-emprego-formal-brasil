@@ -33,4 +33,4 @@ fig.text(0.01,0.985,'Como a exposição à IA generativa se distribui pelo terri
 fig.text(0.01,0.935,'Em cada estado, % dos empregos formais em ocupações cujas tarefas a IA generativa pode executar, em parte (a) ou em metade ou mais (b). O DF (41,9%),\na PB (38,9%) e o PI (37,7%) lideram; MS (29,6%), AM (30,9%) e PA (32,1%) têm os menores valores. Média do Brasil: 35,2% (a) e 17,5% (b).',fontsize=6.5,va='top',color='#333',linespacing=1.25)
 fig.text(0.01,0.012,'Fonte: elaboração própria com dados de RAIS 2025 (Bartkevihi, 2026) e OIT (Gmyrek et al., 2025). Malha: IBGE via tbrugz/geodata-br (7 municípios criados após 2010 sem malha, 0,02% dos vínculos).',fontsize=5.1,color='#555')
 plt.subplots_adjust(left=0.01,right=0.99,top=0.82,bottom=0.05,wspace=0.0)
-fig.savefig('/home/claude/out/fig3.png')
+fig.savefig('saida/fig3.png')

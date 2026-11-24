@@ -3,7 +3,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.patches import Patch
 plt.rcParams['font.family']='Liberation Serif'
-d=pd.read_pickle('/home/claude/data/cnae/cnae.pkl')
+d=pd.read_pickle('dados_brutos/cnae/cnae.pkl')
 g=d.groupby('uf')[['mp','e14','e34']].sum(); g['e']=100*g.e14/g.mp; g['h']=100*g.e34/g.mp
 reg={'RO':'Norte','AC':'Norte','AM':'Norte','RR':'Norte','PA':'Norte','AP':'Norte','TO':'Norte','MA':'Nordeste','PI':'Nordeste','CE':'Nordeste','RN':'Nordeste','PB':'Nordeste','PE':'Nordeste','AL':'Nordeste','SE':'Nordeste','BA':'Nordeste','MG':'Sudeste','ES':'Sudeste','RJ':'Sudeste','SP':'Sudeste','PR':'Sul','SC':'Sul','RS':'Sul','MS':'Centro-Oeste','MT':'Centro-Oeste','GO':'Centro-Oeste','DF':'Centro-Oeste'}
 g['reg']=g.index.map(reg); g=g.sort_values('e',ascending=False)
