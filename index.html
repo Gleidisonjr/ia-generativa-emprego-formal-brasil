@@ -79,6 +79,37 @@ input[type=search]{width:100%;max-width:520px}
 .tip{position:fixed;pointer-events:none;background:#fff;border:1px solid var(--rule);box-shadow:0 4px 16px rgba(0,0,0,.08);padding:8px 10px;font-size:13px;border-radius:6px;display:none;z-index:20;max-width:240px}
 .tip b{display:block;font-size:14px;margin-bottom:2px}
 .about p{font-size:15px;line-height:1.6;color:var(--text);max-width:820px}
+
+.jump{display:flex;gap:6px;overflow-x:auto;padding:10px 0}
+.jump a{font-size:13px;font-weight:600;color:var(--soft);text-decoration:none;padding:6px 10px;border-radius:999px;white-space:nowrap;border:1px solid var(--rule)}
+.jump a:hover{color:var(--navy);border-color:var(--navy)}
+section.blk{padding:44px 0 8px;scroll-margin-top:60px}
+section.blk+section.blk{border-top:1px solid var(--rule)}
+.step{font-size:13px;font-weight:700;color:var(--navy);letter-spacing:.3px;margin:0 0 6px}
+.how{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin:26px 0 6px}
+.how div{font-size:14px;color:var(--text);line-height:1.45}
+.how b{display:block;font-size:12px;color:var(--navy);margin-bottom:4px}
+.guess{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin:8px 0 6px}
+.guess input[type=range]{width:min(420px,100%);accent-color:var(--navy)}
+.gv{font-size:40px;font-weight:700;font-variant-numeric:tabular-nums;min-width:120px}
+.btn{appearance:none;border:0;background:var(--navy);color:#fff;font:inherit;font-weight:600;font-size:15px;padding:10px 18px;border-radius:6px;cursor:pointer}
+.btn.ghost{background:#fff;color:var(--navy);border:1px solid var(--navy)}
+.reveal{margin-top:14px;font-size:16px;line-height:1.55;min-height:24px}
+.game{display:grid;grid-template-columns:1fr auto 1fr;gap:18px;align-items:stretch;margin-top:8px}
+.opt{border:1px solid var(--rule);border-radius:10px;padding:22px;text-align:left;background:#fff;cursor:pointer;font:inherit;transition:border-color .15s,background .15s}
+.opt:hover{border-color:var(--navy)}
+.opt .nm{font-size:22px;font-weight:700}
+.opt .rg{font-size:13px;color:var(--soft);margin-top:4px}
+.opt .res{font-size:30px;font-weight:700;margin-top:12px;font-variant-numeric:tabular-nums;min-height:36px;color:var(--navy)}
+.opt.ok{border-color:#2E7D4F;background:#F1F8F4}
+.opt.no{border-color:#B3261E;background:#FCF2F1}
+.vs{align-self:center;font-weight:700;color:var(--soft)}
+.score{display:flex;gap:24px;align-items:center;margin-top:14px;font-size:15px;flex-wrap:wrap}
+.score b{font-size:22px;font-variant-numeric:tabular-nums}
+.fb{font-size:15px;margin-top:10px;min-height:22px}
+details{margin-top:26px}
+summary{cursor:pointer;font-weight:600;color:var(--navy);font-size:15px}
+@media (max-width:820px){.cmp{grid-template-columns:minmax(0,1fr)!important}.cmp>*{min-width:0}.cmp table{display:block;overflow-x:auto;white-space:nowrap}body{overflow-x:hidden}.how{grid-template-columns:1fr 1fr}.game{grid-template-columns:1fr}.vs{justify-self:center}}
 footer{border-top:1px solid var(--rule);padding:20px 0 40px;font-size:12.5px;color:var(--soft);line-height:1.6}
 @media (max-width:820px){.grid2,.cmp{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr;row-gap:14px}.kpi+.kpi{border-left:0;padding-left:0}.kpi:nth-child(even){padding-left:16px;border-left:1px solid var(--rule)}h1{font-size:24px}.kpi .v{font-size:27px;white-space:nowrap}.rk{grid-template-columns:120px 1fr 44px}.hide-sm{display:none}}
 </style>
@@ -96,54 +127,77 @@ footer{border-top:1px solid var(--rule);padding:20px 0 40px;font-size:12.5px;col
 <div class="kpi"><div class="v ink">12,3 p.p.</div><div class="l">de diferença entre o estado mais e o menos exposto</div></div>
 </div>
 </div></header>
-<nav><div class="wrap tabs" role="tablist">
-<button class="tab" role="tab" aria-selected="true" data-t="mapa">Mapa e ranking</button>
-<button class="tab" role="tab" aria-selected="false" data-t="comparar">Compare estados</button>
-<button class="tab" role="tab" aria-selected="false" data-t="prof">Sua profissão</button>
-<button class="tab" role="tab" aria-selected="false" data-t="mun">Municípios</button>
-<button class="tab" role="tab" aria-selected="false" data-t="sobre">Como foi feito</button>
+<nav><div class="wrap jump">
+<a href="#palpite">1 · Palpite</a><a href="#mapa">2 · Mapa</a><a href="#jogo">3 · Desafio</a><a href="#comparar">4 · Compare</a><a href="#prof">5 · Sua profissão</a><a href="#mun">6 · Seu município</a><a href="#sobre">Como foi feito</a>
 </div></nav>
 <main class="wrap">
+<div class="how">
+<div><b>O que é exposição?</b>A parte das tarefas de uma profissão que a IA generativa conseguiria fazer. Não é demissão: é potencial.</div>
+<div><b>De onde vêm os dados?</b>Índice da OIT para cada profissão, cruzado com os empregos formais da RAIS 2025.</div>
+<div><b>Como navegar</b>Role a página: cada bloco é uma etapa, do Brasil até o seu município.</div>
+<div><b>Dica</b>No celular, toque nos estados do mapa e nos cartões do desafio.</div>
+</div>
 
-<section class="panel on" id="p-mapa">
+<section class="blk" id="palpite">
+<p class="step">1 · DÊ O SEU PALPITE</p>
+<h2>Que parte dos empregos formais do Brasil você acha que está exposta à IA generativa?</h2>
+<p class="sub">Arraste e depois revele a resposta.</p>
+<div class="guess"><input type="range" id="gr" min="0" max="100" value="50" aria-label="Seu palpite em porcentagem"><span class="gv" id="gval">50%</span><button class="btn" id="grev">Revelar</button></div>
+<div class="reveal" id="gout"></div>
+</section>
+
+<section class="blk" id="mapa">
+<p class="step">2 · O MAPA</p>
 <h2>Onde está o emprego mais exposto?</h2>
-<p class="sub">Clique em um estado no mapa ou no ranking para ver os detalhes.</p>
+<p class="sub">Toque em um estado para ver os detalhes. Quanto mais escuro, maior a exposição.</p>
 <div class="seg" id="metric"><button class="on" data-m="p14">Expostos (nota 1 a 4)</button><button data-m="p34">Alta exposição (nota 3 ou 4)</button></div>
 <div class="grid2">
 <div><svg class="map" id="map" role="img" aria-label="Mapa do Brasil por estado, colorido pelo percentual de emprego exposto"></svg>
 <div class="legend"><span id="lgmin"></span><span class="bar" id="lgbar"></span><span id="lgmax"></span></div></div>
 <div><div class="card" id="ufcard"></div></div>
 </div>
-<h2 style="margin-top:34px">Ranking dos estados</h2>
-<p class="sub" id="ranksub">% dos vínculos formais em profissões expostas. A barra escura é a média do Brasil.</p>
-<div class="rank" id="rank"></div>
+<details><summary>Ver o ranking completo dos 27 estados</summary>
+<p class="sub" id="ranksub" style="margin-top:12px"></p>
+<div class="rank" id="rank"></div></details>
 </section>
 
-<section class="panel" id="p-comparar">
+<section class="blk" id="jogo">
+<p class="step">3 · DESAFIO</p>
+<h2>Qual estado tem mais emprego exposto?</h2>
+<p class="sub">Dez rodadas. Escolha o estado com o maior percentual de vínculos em profissões expostas.</p>
+<div class="game" id="game"></div>
+<div class="fb" id="gfb"></div>
+<div class="score"><span>Rodada <b id="grd">1</b>/10</span><span>Acertos <b id="gsc">0</b></span><span>Sequência <b id="gst">0</b></span><button class="btn" id="gnext" style="display:none">Próxima</button><button class="btn ghost" id="grst">Recomeçar</button></div>
+</section>
+
+<section class="blk" id="comparar">
+<p class="step">4 · COMPARE</p>
 <h2>Compare dois estados</h2>
-<p class="sub">Exposição e peso de cada setor no emprego formal. A diferença entre estados vem do tamanho dos setores e das profissões dentro deles.</p>
+<p class="sub">A diferença entre estados vem do tamanho de cada setor e das profissões dentro deles.</p>
 <div class="ctrls"><select id="ca" aria-label="Primeiro estado"></select><span>vs</span><select id="cb" aria-label="Segundo estado"></select></div>
 <div class="cmp" id="cmp"></div>
 </section>
 
-<section class="panel" id="p-prof">
+<section class="blk" id="prof">
+<p class="step">5 · SUA PROFISSÃO</p>
 <h2>Qual a exposição da sua profissão?</h2>
 <p class="sub">Busque pelo nome da profissão como aparece na Classificação Brasileira de Ocupações (CBO).</p>
 <div class="ctrls"><input type="search" id="q" placeholder="Ex.: vendedor, contador, motorista, professor" aria-label="Buscar profissão"><select id="quf" aria-label="Estado para contar vínculos"></select></div>
 <div class="chips" id="chips"></div>
 <table id="ptab"><thead><tr><th>Profissão (CBO)</th><th>Exposição</th><th class="n">Vínculos no Brasil</th><th class="n" id="qufh">No estado</th><th class="n hide-sm">Salário médio</th></tr></thead><tbody></tbody></table>
-<p class="note">Exposição segundo a nota da OIT para a profissão equivalente na lista internacional (ISCO-08): alta = nota 3 ou 4 (a IA poderia fazer metade ou mais das tarefas); baixa ou média = nota 1 ou 2; não exposta = sem nota. Exposição mede potencial técnico, não demissão. Profissões com menos de 50 vínculos no país não aparecem.</p>
+<p class="note">Alta = nota 3 ou 4 da OIT (a IA poderia fazer metade ou mais das tarefas); baixa ou média = nota 1 ou 2; não exposta = sem nota. Profissões com menos de 50 vínculos no país não aparecem.</p>
 </section>
 
-<section class="panel" id="p-mun">
+<section class="blk" id="mun">
+<p class="step">6 · SEU MUNICÍPIO</p>
 <h2>E no seu município?</h2>
-<p class="sub">% dos vínculos formais em profissões expostas, por município. Municípios pequenos variam mais, porque têm poucos empregos.</p>
+<p class="sub">Municípios pequenos variam mais, porque têm poucos empregos.</p>
 <div class="ctrls"><select id="muf" aria-label="Estado"></select><input type="search" id="mq" placeholder="Buscar município" aria-label="Buscar município" style="max-width:300px"><select id="mord" aria-label="Ordenar"><option value="d">Mais expostos primeiro</option><option value="a">Menos expostos primeiro</option><option value="v">Maiores em empregos</option></select></div>
 <table id="mtab"><thead><tr><th>Município</th><th class="n">Vínculos</th><th class="n">Expostos</th><th></th><th class="n hide-sm">Alta exposição</th></tr></thead><tbody></tbody></table>
 <p class="note" id="mnote"></p>
 </section>
-
-<section class="panel about" id="p-sobre">
+<section class="blk about" id="sobre">
+<p class="step">COMO FOI FEITO</p>
 <h2>Como foi feito</h2>
 <p><b>Pergunta.</b> Quais estados e regiões do Brasil concentram mais empregos formais expostos à IA generativa?</p>
 <p><b>Dados.</b> A Organização Internacional do Trabalho (Gmyrek et al., 2025) atribui a cada profissão da lista internacional ISCO-08 uma nota de exposição de 1 a 4. A RAIS 2025 (Ministério do Trabalho), consultada com SQL no BigQuery pela Base dos Dados, traz 53,5 milhões de vínculos formais ativos em 31/12/2025, com a profissão (CBO), o setor (CNAE) e o município de cada um.</p>
@@ -162,7 +216,7 @@ const tip=$('#tip');
 function showTip(e,h){tip.innerHTML=h;tip.style.display='block';const x=Math.min(e.clientX+14,innerWidth-250);tip.style.left=x+'px';tip.style.top=(e.clientY+14)+'px'}
 function hideTip(){tip.style.display='none'}
 // tabs
-document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.setAttribute('aria-selected',x===b));document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('on',p.id==='p-'+b.dataset.t))});
+
 // color ramp
 function lerp(a,b,t){return Math.round(a+(b-a)*t)}
 function ramp(t){const c0=[226,234,243],c1=[47,102,153],c2=[15,46,77];const [a,b,k]=t<.6?[c0,c1,t/.6]:[c1,c2,(t-.6)/.4];return `rgb(${lerp(a[0],b[0],k)},${lerp(a[1],b[1],k)},${lerp(a[2],b[2],k)})`}
@@ -186,6 +240,26 @@ $('#ufcard').innerHTML=`<h3>${x.n}</h3><div class="meta">Região ${x.r} · ${int
 function select(u){SEL=u;paint()}
 document.querySelectorAll('#metric button').forEach(b=>b.onclick=()=>{document.querySelectorAll('#metric button').forEach(x=>x.classList.toggle('on',x===b));M=b.dataset.m;paint()});
 paint();
+
+// palpite
+$('#gr').oninput=()=>{$('#gval').textContent=$('#gr').value+'%'};
+$('#grev').onclick=()=>{const g=+$('#gr').value,d=g-35.2,ad=Math.abs(d);
+const msg=ad<=3?'Na mosca!':ad<=10?'Chegou perto.':d>0?'Você superestimou.':'Você subestimou.';
+$('#gout').innerHTML=`<b>${msg}</b> A resposta é <b style="color:var(--navy)">35,2%</b>: cerca de um em cada três empregos formais. Seu palpite ficou ${fmt(ad)} pontos ${d>=0?'acima':'abaixo'}. Metade disso, 17,5%, é alta exposição. Role a página para ver onde eles estão.`};
+// desafio
+let G={r:1,sc:0,st:0,pair:[],done:false};
+function pick(){let a,b;do{a=UF[Math.floor(Math.random()*27)];b=UF[Math.floor(Math.random()*27)]}while(a===b||Math.abs(D.ufs[a].p14-D.ufs[b].p14)<0.3);return [a,b]}
+function round(){G.pair=pick();G.done=false;$('#gfb').textContent='';$('#gnext').style.display='none';
+$('#game').innerHTML=G.pair.map((u,i)=>`<button class="opt" data-u="${u}"><div class="nm">${D.ufs[u].n}</div><div class="rg">Região ${D.ufs[u].r}</div><div class="res"></div></button>`+(i===0?'<div class="vs">ou</div>':'')).join('');
+$('#game').querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(b.dataset.u));$('#grd').textContent=G.r}
+function answer(u){if(G.done)return;G.done=true;const [a,b]=G.pair,win=D.ufs[a].p14>D.ufs[b].p14?a:b,ok=u===win;
+$('#game').querySelectorAll('.opt').forEach(el=>{const x=el.dataset.u;el.querySelector('.res').textContent=fmt(D.ufs[x].p14)+'%';if(x===u)el.classList.add(ok?'ok':'no');else if(!ok)el.classList.add('ok')});
+if(ok){G.sc++;G.st++}else G.st=0;$('#gsc').textContent=G.sc;$('#gst').textContent=G.st;
+const w=D.ufs[win],top=w.sec[0];
+$('#gfb').innerHTML=(ok?'<b style="color:#2E7D4F">Acertou.</b> ':'<b style="color:#B3261E">Não foi dessa vez.</b> ')+`${w.n} tem ${fmt(w.p14)}%; o setor que mais pesa lá é ${top.s.toLowerCase()} (${fmt(top.contrib)} p.p.).`;
+if(G.r<10)$('#gnext').style.display='inline-block';else{$('#gfb').innerHTML+=`<br><b>Fim de jogo: ${G.sc} de 10.</b> ${G.sc>=8?'Você entende do mercado de trabalho brasileiro.':G.sc>=5?'Nada mal. As diferenças entre estados são mesmo pequenas.':'Difícil, né? As diferenças entre estados são pequenas, e a mistura de profissões engana.'}`}}
+$('#gnext').onclick=()=>{G.r++;round()};$('#grst').onclick=()=>{G={r:1,sc:0,st:0,pair:[],done:false};$('#gsc').textContent=0;$('#gst').textContent=0;round()};round();
+
 // compare
 const opts=sel=>UF.map(u=>`<option value="${u}" ${u===sel?'selected':''}>${D.ufs[u].n}</option>`).join('');
 $('#ca').innerHTML=opts('MT');$('#cb').innerHTML=opts('DF');
