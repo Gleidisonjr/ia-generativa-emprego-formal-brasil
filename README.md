@@ -1,10 +1,14 @@
 # Exposição do emprego formal à IA generativa nos estados brasileiros
 
-Trabalho da disciplina *Metodologia e Técnicas de Pesquisa em Economia II* (Ciências Econômicas, UFMT, 2026). Integrantes: Eduardo Melo, Gleidison Jr., Guilherme Rocha e Nicolas Ferreira. Professora: Carla Cristina Rosa de Almeida.
+Trabalho da disciplina *Metodologia e Técnicas de Pesquisa em Economia II* (Ciências Econômicas, UFMT, 2026). Integrantes: Eduardo Melo, Gleidison Jr, Guilherme Rocha e Nicolas Ferreira. Professora: Carla Cristina Rosa de Almeida.
 
 **Pergunta:** quais estados e regiões do Brasil concentram mais empregos formais expostos à IA generativa?
 
 **Resposta curta:** 35,2% dos vínculos formais estão em profissões expostas (17,5% em alta exposição). O Distrito Federal tem o maior valor (41,9%) e Mato Grosso do Sul, o menor (29,6%).
+
+## Painel interativo
+
+**[Abrir o painel](https://gleidisonjr.github.io/ia-generativa-emprego-formal-brasil/)**: mapa clicável por estado, comparação entre estados, busca pela sua profissão e ranking dos municípios. Funciona no celular, sem instalar nada.
 
 ## Comece por aqui
 
