@@ -111,6 +111,16 @@ details{margin-top:26px}
 summary{cursor:pointer;font-weight:600;color:var(--navy);font-size:15px}
 @media (max-width:820px){.cmp{grid-template-columns:minmax(0,1fr)!important}.cmp>*{min-width:0}.cmp table{display:block;overflow-x:auto;white-space:nowrap}body{overflow-x:hidden}.how{grid-template-columns:1fr 1fr}.game{grid-template-columns:1fr}.vs{justify-self:center}}
 .logos{display:flex;gap:14px;align-items:center;margin-bottom:16px}.logos img{height:52px;width:auto}
+.qsug{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:6px 0 18px}
+.qs{border:1px solid var(--rule);border-radius:8px;background:#fff;text-align:left;padding:12px 14px;font:inherit;font-size:14.5px;cursor:pointer;line-height:1.4}
+.qs:hover{border-color:var(--navy)}.qs small{display:block;color:var(--soft);font-size:12.5px;margin-top:3px}
+.qform{display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end}
+.qform label{font-size:12.5px;font-weight:600;color:var(--soft);display:flex;flex-direction:column;gap:6px}
+.qform input{font:inherit;font-size:15px;padding:9px 10px;border:1px solid #B8BEC6;border-radius:6px}
+.hyp{border:1px solid var(--rule);border-radius:10px;padding:22px;background:var(--mist)}
+.hyp .q{font-size:18px;font-weight:700;margin:0 0 6px}.hyp .h{font-size:15px;color:var(--text);margin:0 0 16px}
+.hyp .acts{display:flex;gap:10px;flex-wrap:wrap}
+@media (max-width:820px){.qsug,.qform{grid-template-columns:1fr}}
 footer{border-top:1px solid var(--rule);padding:20px 0 40px;font-size:12.5px;color:var(--soft);line-height:1.6}
 @media (max-width:820px){.grid2,.cmp{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr;row-gap:14px}.kpi+.kpi{border-left:0;padding-left:0}.kpi:nth-child(even){padding-left:16px;border-left:1px solid var(--rule)}h1{font-size:24px}.kpi .v{font-size:27px;white-space:nowrap}.rk{grid-template-columns:120px 1fr 44px}.hide-sm{display:none}}
 </style>
@@ -130,7 +140,7 @@ footer{border-top:1px solid var(--rule);padding:20px 0 40px;font-size:12.5px;col
 </div>
 </div></header>
 <nav><div class="wrap jump">
-<a href="#palpite">1 · Palpite</a><a href="#mapa">2 · Mapa</a><a href="#jogo">3 · Desafio</a><a href="#comparar">4 · Compare</a><a href="#prof">5 · Sua profissão</a><a href="#mun">6 · Seu município</a><a href="#sobre">Como foi feito</a>
+<a href="#palpite">1 · Palpite</a><a href="#pesquisa">2 · Sua pergunta</a><a href="#mapa">3 · Mapa</a><a href="#jogo">4 · Desafio</a><a href="#comparar">5 · Compare</a><a href="#prof">6 · Profissão</a><a href="#mun">7 · Município</a><a href="#conclusao">8 · Conclusão</a><a href="#sobre">Como foi feito</a>
 </div></nav>
 <main class="wrap">
 <div class="how">
@@ -148,8 +158,21 @@ footer{border-top:1px solid var(--rule);padding:20px 0 40px;font-size:12.5px;col
 <div class="reveal" id="gout"></div>
 </section>
 
+
+<section class="blk" id="pesquisa">
+<p class="step">2 · FAÇA A SUA PESQUISA</p>
+<h2>Qual é a sua pergunta sobre IA e emprego?</h2>
+<p class="sub">Escreva uma pergunta e uma hipótese, explore os dados nos blocos abaixo e volte no final para dizer se ela se confirmou. Sem ideia? Escolha uma das sugestões.</p>
+<div class="qsug" id="qsug"></div>
+<div class="qform">
+<label>Minha pergunta<input type="text" id="mq1" placeholder="Ex.: Meu estado está acima da média do Brasil?"></label>
+<label>Minha hipótese<input type="text" id="mh1" placeholder="Ex.: Sim, porque tem muito emprego de escritório"></label>
+<button class="btn" id="mgo">Começar a explorar</button>
+</div>
+<div class="reveal" id="mmsg"></div>
+</section>
 <section class="blk" id="mapa">
-<p class="step">2 · O MAPA</p>
+<p class="step">3 · O MAPA</p>
 <h2>Onde está o emprego mais exposto?</h2>
 <p class="sub">Toque em um estado para ver os detalhes. Quanto mais escuro, maior a exposição.</p>
 <div class="seg" id="metric"><button class="on" data-m="p14">Expostos (nota 1 a 4)</button><button data-m="p34">Alta exposição (nota 3 ou 4)</button></div>
@@ -164,7 +187,7 @@ footer{border-top:1px solid var(--rule);padding:20px 0 40px;font-size:12.5px;col
 </section>
 
 <section class="blk" id="jogo">
-<p class="step">3 · DESAFIO</p>
+<p class="step">4 · DESAFIO</p>
 <h2>Qual estado tem mais emprego exposto?</h2>
 <p class="sub">Dez rodadas. Escolha o estado com o maior percentual de vínculos em profissões expostas.</p>
 <div class="game" id="game"></div>
@@ -173,7 +196,7 @@ footer{border-top:1px solid var(--rule);padding:20px 0 40px;font-size:12.5px;col
 </section>
 
 <section class="blk" id="comparar">
-<p class="step">4 · COMPARE</p>
+<p class="step">5 · COMPARE</p>
 <h2>Compare dois estados</h2>
 <p class="sub">A diferença entre estados vem do tamanho de cada setor e das profissões dentro deles.</p>
 <div class="ctrls"><select id="ca" aria-label="Primeiro estado"></select><span>vs</span><select id="cb" aria-label="Segundo estado"></select></div>
@@ -181,7 +204,7 @@ footer{border-top:1px solid var(--rule);padding:20px 0 40px;font-size:12.5px;col
 </section>
 
 <section class="blk" id="prof">
-<p class="step">5 · SUA PROFISSÃO</p>
+<p class="step">6 · SUA PROFISSÃO</p>
 <h2>Qual a exposição da sua profissão?</h2>
 <p class="sub">Busque pelo nome da profissão como aparece na Classificação Brasileira de Ocupações (CBO).</p>
 <div class="ctrls"><input type="search" id="q" placeholder="Ex.: vendedor, contador, motorista, professor" aria-label="Buscar profissão"><select id="quf" aria-label="Estado para contar vínculos"></select></div>
@@ -191,12 +214,18 @@ footer{border-top:1px solid var(--rule);padding:20px 0 40px;font-size:12.5px;col
 </section>
 
 <section class="blk" id="mun">
-<p class="step">6 · SEU MUNICÍPIO</p>
+<p class="step">7 · SEU MUNICÍPIO</p>
 <h2>E no seu município?</h2>
 <p class="sub">Municípios pequenos variam mais, porque têm poucos empregos.</p>
 <div class="ctrls"><select id="muf" aria-label="Estado"></select><input type="search" id="mq" placeholder="Buscar município" aria-label="Buscar município" style="max-width:300px"><select id="mord" aria-label="Ordenar"><option value="d">Mais expostos primeiro</option><option value="a">Menos expostos primeiro</option><option value="v">Maiores em empregos</option></select></div>
 <table id="mtab"><thead><tr><th>Município</th><th class="n">Vínculos</th><th class="n">Expostos</th><th></th><th class="n hide-sm">Alta exposição</th></tr></thead><tbody></tbody></table>
 <p class="note" id="mnote"></p>
+</section>
+
+<section class="blk" id="conclusao">
+<p class="step">8 · SUA CONCLUSÃO</p>
+<h2>E a sua hipótese, se confirmou?</h2>
+<div class="hyp" id="hyp"><p class="sub">Escreva uma pergunta e uma hipótese no bloco 2 para registrar a sua conclusão aqui.</p></div>
 </section>
 <section class="blk about" id="sobre">
 <p class="step">COMO FOI FEITO</p>
@@ -281,6 +310,21 @@ $('#ptab tbody').innerHTML=r.length?r.map(c=>`<tr><td>${c.t}<div style="font-siz
 $('#q').oninput=prof;$('#quf').onchange=prof;$('#quf').value='MT';
 $('#chips').innerHTML=['Vendedor','Auxiliar de escritório','Contador','Motorista','Professor','Caixa','Enfermeiro','Trabalhador agropecuário'].map(c=>`<button class="chip">${c}</button>`).join('');
 $('#chips').querySelectorAll('.chip').forEach(b=>b.onclick=()=>{$('#q').value=b.textContent;prof()});prof();
+
+// sua pesquisa
+const SUG=[['Meu estado está acima da média do Brasil?','Veja no mapa (bloco 3)','mapa',null],
+['A minha profissão é mais exposta que a média?','Busque no bloco 6','prof',()=>{$('#q').focus()}],
+['O Nordeste é mais exposto que o Sul?','Compare Bahia e Rio Grande do Sul no bloco 5','comparar',()=>{$('#ca').value='BA';$('#cb').value='RS';cmp()}],
+['Cidades grandes são mais expostas que as pequenas?','Ordene os municípios por tamanho no bloco 7','mun',()=>{$('#mord').value='v';mun()}]];
+$('#qsug').innerHTML=SUG.map((x,i)=>`<button class="qs" data-i="${i}">${x[0]}<small>${x[1]}</small></button>`).join('');
+let MYQ=null;
+function setHyp(q,h){MYQ={q,h};$('#hyp').innerHTML=`<p class="q">${q.replace(/</g,'&lt;')}</p><p class="h">Minha hipótese: ${(h||'(sem hipótese)').replace(/</g,'&lt;')}</p><div class="acts"><button class="btn" data-r="c">Confirmada</button><button class="btn ghost" data-r="r">Refutada</button><button class="btn ghost" data-r="i">Inconclusiva</button></div><div class="reveal" id="hres"></div>`;
+$('#hyp').querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>{const r=b.dataset.r;$('#hres').innerHTML=r==='c'?'<b>Hipótese confirmada.</b> Os dados sustentaram o que você esperava. Foi assim com as nossas duas hipóteses: o Distrito Federal lidera e as regiões quase não diferem.':r==='r'?'<b>Hipótese refutada.</b> Ótimo: refutar também é resultado. Nós esperávamos o Sul e o Sudeste bem à frente, e não foi o que os dados mostraram.':'<b>Inconclusiva.</b> Talvez falte um dado: a RAIS não tem os informais, e a nota mede potencial, não demissão. Que dado responderia a sua pergunta?'})}
+$('#qsug').querySelectorAll('.qs').forEach(b=>b.onclick=()=>{const x=SUG[+b.dataset.i];$('#mq1').value=x[0];$('#mh1').focus();});
+$('#mgo').onclick=()=>{const q=$('#mq1').value.trim(),h=$('#mh1').value.trim();if(!q){$('#mmsg').textContent='Escreva uma pergunta ou escolha uma sugestão.';return}
+setHyp(q,h);const x=SUG.find(z=>z[0]===q);$('#mmsg').innerHTML='<b>Anotado.</b> Explore os blocos abaixo e registre a sua conclusão no bloco 8.';
+if(x){if(x[3])x[3]();document.getElementById(x[2]).scrollIntoView({behavior:'smooth'})}else document.getElementById('mapa').scrollIntoView({behavior:'smooth'})};
+
 // municípios
 $('#muf').innerHTML='<option value="">Todos os estados</option>'+opts('MT');$('#muf').value='MT';
 function mun(){const uf=$('#muf').value,q=norm($('#mq').value.trim()),o=$('#mord').value;
