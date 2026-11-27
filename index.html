@@ -121,6 +121,17 @@ summary{cursor:pointer;font-weight:600;color:var(--navy);font-size:15px}
 .hyp .q{font-size:18px;font-weight:700;margin:0 0 6px}.hyp .h{font-size:15px;color:var(--text);margin:0 0 16px}
 .hyp .acts{display:flex;gap:10px;flex-wrap:wrap}
 @media (max-width:820px){.qsug,.qform{grid-template-columns:1fr}}
+.ac{position:relative;flex:1;max-width:520px;min-width:260px}
+.ac input{width:100%;font:inherit;font-size:16px;padding:11px 12px;border:1px solid #B8BEC6;border-radius:8px}
+.ac input:focus{outline:2px solid var(--navy);outline-offset:0;border-color:var(--navy)}
+.acl{list-style:none;margin:4px 0 0;padding:4px;position:absolute;left:0;right:0;top:100%;background:#fff;border:1px solid var(--rule);border-radius:8px;box-shadow:0 8px 24px rgba(0,0,0,.10);z-index:10;max-height:320px;overflow-y:auto;display:none}
+.acl li{padding:9px 10px;border-radius:6px;cursor:pointer;font-size:15px;line-height:1.3}
+.acl li small{color:var(--soft);font-size:12.5px;margin-left:6px}
+.acl li[aria-selected=true],.acl li:hover{background:var(--mist)}
+.res{border:1px solid var(--rule);border-radius:12px;padding:22px 24px;margin-top:6px}
+.res h3{font-size:22px;margin:0 0 4px}.res .meta{font-size:13px;color:var(--soft);margin-bottom:16px}
+.res .row{gap:34px}
+.vs{font-size:14px;color:var(--text);margin-top:4px;line-height:1.5}
 footer{border-top:1px solid var(--rule);padding:20px 0 40px;font-size:12.5px;color:var(--soft);line-height:1.6}
 @media (max-width:820px){.grid2,.cmp{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr;row-gap:14px}.kpi+.kpi{border-left:0;padding-left:0}.kpi:nth-child(even){padding-left:16px;border-left:1px solid var(--rule)}h1{font-size:24px}.kpi .v{font-size:27px;white-space:nowrap}.rk{grid-template-columns:120px 1fr 44px}.hide-sm{display:none}}
 </style>
@@ -140,15 +151,9 @@ footer{border-top:1px solid var(--rule);padding:20px 0 40px;font-size:12.5px;col
 </div>
 </div></header>
 <nav><div class="wrap jump">
-<a href="#palpite">1 · Palpite</a><a href="#pesquisa">2 · Sua pergunta</a><a href="#mapa">3 · Mapa</a><a href="#jogo">4 · Desafio</a><a href="#comparar">5 · Compare</a><a href="#prof">6 · Profissão</a><a href="#mun">7 · Município</a><a href="#conclusao">8 · Conclusão</a><a href="#sobre">Como foi feito</a>
+<a href="#palpite">1 · Palpite</a><a href="#pesquisa">2 · Perguntas</a><a href="#mapa">3 · Mapa</a><a href="#jogo">4 · Desafio</a><a href="#comparar">5 · Compare</a><a href="#prof">6 · Profissão</a><a href="#mun">7 · Município</a><a href="#sobre">Como foi feito</a>
 </div></nav>
 <main class="wrap">
-<div class="how">
-<div><b>O que é exposição?</b>A parte das tarefas de uma profissão que a IA generativa conseguiria fazer. Não é demissão: é potencial.</div>
-<div><b>De onde vêm os dados?</b>Índice da OIT para cada profissão, cruzado com os empregos formais da RAIS 2025.</div>
-<div><b>Como navegar</b>Role a página: cada bloco é uma etapa, do Brasil até o seu município.</div>
-<div><b>Dica</b>No celular, toque nos estados do mapa e nos cartões do desafio.</div>
-</div>
 
 <section class="blk" id="palpite">
 <p class="step">1 · DÊ O SEU PALPITE</p>
@@ -160,16 +165,10 @@ footer{border-top:1px solid var(--rule);padding:20px 0 40px;font-size:12.5px;col
 
 
 <section class="blk" id="pesquisa">
-<p class="step">2 · FAÇA A SUA PESQUISA</p>
-<h2>Qual é a sua pergunta sobre IA e emprego?</h2>
-<p class="sub">Escreva uma pergunta e uma hipótese, explore os dados nos blocos abaixo e volte no final para dizer se ela se confirmou. Sem ideia? Escolha uma das sugestões.</p>
+<p class="step">2 · ESCOLHA UMA PERGUNTA</p>
+<h2>O que você quer descobrir?</h2>
+<p class="sub">Toque em uma pergunta e vá direto para a resposta. Ou role a página e explore à vontade.</p>
 <div class="qsug" id="qsug"></div>
-<div class="qform">
-<label>Minha pergunta<input type="text" id="mq1" placeholder="Ex.: Meu estado está acima da média do Brasil?"></label>
-<label>Minha hipótese<input type="text" id="mh1" placeholder="Ex.: Sim, porque tem muito emprego de escritório"></label>
-<button class="btn" id="mgo">Começar a explorar</button>
-</div>
-<div class="reveal" id="mmsg"></div>
 </section>
 <section class="blk" id="mapa">
 <p class="step">3 · O MAPA</p>
@@ -206,27 +205,23 @@ footer{border-top:1px solid var(--rule);padding:20px 0 40px;font-size:12.5px;col
 <section class="blk" id="prof">
 <p class="step">6 · SUA PROFISSÃO</p>
 <h2>Qual a exposição da sua profissão?</h2>
-<p class="sub">Busque pelo nome da profissão como aparece na Classificação Brasileira de Ocupações (CBO).</p>
-<div class="ctrls"><input type="search" id="q" placeholder="Ex.: vendedor, contador, motorista, professor" aria-label="Buscar profissão"><select id="quf" aria-label="Estado para contar vínculos"></select></div>
+<p class="sub">Comece a digitar e escolha a sua profissão na lista. São as profissões da Classificação Brasileira de Ocupações (CBO).</p>
+<div class="ctrls"><div class="ac"><input type="text" id="q" placeholder="Digite: vendedor, contador, motorista..." autocomplete="off" role="combobox" aria-expanded="false" aria-controls="qlist" aria-label="Buscar profissão"><ul class="acl" id="qlist" role="listbox"></ul></div><select id="quf" aria-label="Estado"></select></div>
 <div class="chips" id="chips"></div>
-<table id="ptab"><thead><tr><th>Profissão (CBO)</th><th>Exposição</th><th class="n">Vínculos no Brasil</th><th class="n" id="qufh">No estado</th><th class="n hide-sm">Salário médio</th></tr></thead><tbody></tbody></table>
-<p class="note">Alta = nota 3 ou 4 da OIT (a IA poderia fazer metade ou mais das tarefas); baixa ou média = nota 1 ou 2; não exposta = sem nota. Profissões com menos de 50 vínculos no país não aparecem.</p>
+<div id="pcard"></div>
+<p class="note">Alta = nota 3 ou 4 da OIT (a IA poderia fazer metade ou mais das tarefas); baixa ou média = nota 1 ou 2; não exposta = sem nota. Exposição mede potencial técnico, não demissão.</p>
 </section>
 
 <section class="blk" id="mun">
 <p class="step">7 · SEU MUNICÍPIO</p>
 <h2>E no seu município?</h2>
-<p class="sub">Municípios pequenos variam mais, porque têm poucos empregos.</p>
-<div class="ctrls"><select id="muf" aria-label="Estado"></select><input type="search" id="mq" placeholder="Buscar município" aria-label="Buscar município" style="max-width:300px"><select id="mord" aria-label="Ordenar"><option value="d">Mais expostos primeiro</option><option value="a">Menos expostos primeiro</option><option value="v">Maiores em empregos</option></select></div>
-<table id="mtab"><thead><tr><th>Município</th><th class="n">Vínculos</th><th class="n">Expostos</th><th></th><th class="n hide-sm">Alta exposição</th></tr></thead><tbody></tbody></table>
-<p class="note" id="mnote"></p>
+<p class="sub">Comece a digitar e escolha o seu município na lista.</p>
+<div class="ctrls"><div class="ac"><input type="text" id="mq" placeholder="Digite: Cuiabá, Sinop, Rondonópolis..." autocomplete="off" role="combobox" aria-expanded="false" aria-controls="mlist" aria-label="Buscar município"><ul class="acl" id="mlist" role="listbox"></ul></div></div>
+<div id="mcard"></div>
+<p class="note">Municípios pequenos variam mais, porque têm poucos empregos formais.</p>
 </section>
 
-<section class="blk" id="conclusao">
-<p class="step">8 · SUA CONCLUSÃO</p>
-<h2>E a sua hipótese, se confirmou?</h2>
-<div class="hyp" id="hyp"><p class="sub">Escreva uma pergunta e uma hipótese no bloco 2 para registrar a sua conclusão aqui.</p></div>
-</section>
+
 <section class="blk about" id="sobre">
 <p class="step">COMO FOI FEITO</p>
 <h2>Como foi feito</h2>
@@ -299,40 +294,43 @@ const get=(x,n)=>x.sec.find(s=>s.s===n)||{peso:0,exp:0,contrib:0};
 const head=x=>`<div class="card"><h3>${x.n}</h3><div class="meta">${x.rank}º de 27 · ${int(x.vinc)} vínculos</div><div class="row"><div><div class="big">${fmt(x.p14)}%</div><div class="l">expostos</div></div><div><div class="mid">${fmt(x.p34)}%</div><div class="l">alta exposição</div></div></div></div>`;
 $('#cmp').innerHTML=head(a)+head(b)+`<div style="grid-column:1/-1"><table><thead><tr><th>Setor</th><th class="n">% do emprego · ${A}</th><th class="n">% do emprego · ${B}</th><th class="n hide-sm">% exposto · ${A}</th><th class="n hide-sm">% exposto · ${B}</th><th class="n">Contribuição · ${A}</th><th class="n">Contribuição · ${B}</th></tr></thead><tbody>${names.map(n=>{const x=get(a,n),y=get(b,n);return `<tr><td>${n}</td><td class="n">${fmt(x.peso)}%</td><td class="n">${fmt(y.peso)}%</td><td class="n hide-sm">${fmt(x.exp)}%</td><td class="n hide-sm">${fmt(y.exp)}%</td><td class="n"><b>${fmt(x.contrib)}</b></td><td class="n"><b>${fmt(y.contrib)}</b></td></tr>`}).join('')}</tbody></table><p class="note">Contribuição em pontos percentuais do total do estado. Setores entre os oito que mais pesam em cada estado.</p></div>`}
 $('#ca').onchange=cmp;$('#cb').onchange=cmp;cmp();
+// autocomplete genérico
+function ac(input,list,source,label,onPick){let items=[],act=-1;
+function close(){list.style.display='none';input.setAttribute('aria-expanded','false');act=-1}
+function render(){list.innerHTML=items.map((x,i)=>`<li role="option" aria-selected="${i===act}" data-i="${i}">${label(x)}</li>`).join('')||'<li aria-disabled="true">Nada encontrado. Tente outra palavra.</li>';list.style.display='block';input.setAttribute('aria-expanded','true');
+list.querySelectorAll('li[data-i]').forEach(li=>li.onmousedown=e=>{e.preventDefault();pick(+li.dataset.i)})}
+function pick(i){const x=items[i];if(!x)return;onPick(x);close()}
+input.oninput=()=>{const q=norm(input.value.trim());if(q.length<2){close();return}items=source(q).slice(0,8);act=-1;render()};
+input.onkeydown=e=>{if(list.style.display!=='block')return;if(e.key==='ArrowDown'){act=Math.min(act+1,items.length-1);render();e.preventDefault()}else if(e.key==='ArrowUp'){act=Math.max(act-1,0);render();e.preventDefault()}else if(e.key==='Enter'){pick(act<0?0:act);e.preventDefault()}else if(e.key==='Escape')close()};
+input.onblur=()=>setTimeout(close,120);input.onfocus=()=>input.select()}
 // profissões
 const norm=s=>s.normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase();
-D.cbo.forEach(c=>c.k=norm(c.t+' '+c.c));
-$('#quf').innerHTML='<option value="">Vínculos em: escolha o estado</option>'+opts('MT');
-const tag=c=>c.a>=.5?'<span class="tag t-alta">Alta</span>':c.e>=.5?'<span class="tag t-media">Baixa ou média</span>':'<span class="tag t-nao">Não exposta</span>';
-function prof(){const q=norm($('#q').value.trim()),uf=$('#quf').value;$('#qufh').textContent=uf?'Em '+uf:'No estado';
-let r=q.length<2?D.cbo.slice().sort((a,b)=>b.v-a.v).slice(0,15):D.cbo.filter(c=>q.split(/\s+/).every(w=>c.k.includes(w))).sort((a,b)=>b.v-a.v).slice(0,40);
-$('#ptab tbody').innerHTML=r.length?r.map(c=>`<tr><td>${c.t}<div style="font-size:12px;color:var(--soft)">CBO ${c.c}</div></td><td>${tag(c)}</td><td class="n">${int(c.v)}</td><td class="n">${uf?int(c.u[uf]||0):'–'}</td><td class="n hide-sm">${c.s?'R$ '+int(c.s):'–'}</td></tr>`).join(''):'<tr><td colspan="5">Nenhuma profissão encontrada. Tente outra palavra.</td></tr>'}
-$('#q').oninput=prof;$('#quf').onchange=prof;$('#quf').value='MT';
-$('#chips').innerHTML=['Vendedor','Auxiliar de escritório','Contador','Motorista','Professor','Caixa','Enfermeiro','Trabalhador agropecuário'].map(c=>`<button class="chip">${c}</button>`).join('');
-$('#chips').querySelectorAll('.chip').forEach(b=>b.onclick=()=>{$('#q').value=b.textContent;prof()});prof();
-
-// sua pesquisa
-const SUG=[['Meu estado está acima da média do Brasil?','Veja no mapa (bloco 3)','mapa',null],
-['A minha profissão é mais exposta que a média?','Busque no bloco 6','prof',()=>{$('#q').focus()}],
-['O Nordeste é mais exposto que o Sul?','Compare Bahia e Rio Grande do Sul no bloco 5','comparar',()=>{$('#ca').value='BA';$('#cb').value='RS';cmp()}],
-['Cidades grandes são mais expostas que as pequenas?','Ordene os municípios por tamanho no bloco 7','mun',()=>{$('#mord').value='v';mun()}]];
-$('#qsug').innerHTML=SUG.map((x,i)=>`<button class="qs" data-i="${i}">${x[0]}<small>${x[1]}</small></button>`).join('');
-let MYQ=null;
-function setHyp(q,h){MYQ={q,h};$('#hyp').innerHTML=`<p class="q">${q.replace(/</g,'&lt;')}</p><p class="h">Minha hipótese: ${(h||'(sem hipótese)').replace(/</g,'&lt;')}</p><div class="acts"><button class="btn" data-r="c">Confirmada</button><button class="btn ghost" data-r="r">Refutada</button><button class="btn ghost" data-r="i">Inconclusiva</button></div><div class="reveal" id="hres"></div>`;
-$('#hyp').querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>{const r=b.dataset.r;$('#hres').innerHTML=r==='c'?'<b>Hipótese confirmada.</b> Os dados sustentaram o que você esperava. Foi assim com as nossas duas hipóteses: o Distrito Federal lidera e as regiões quase não diferem.':r==='r'?'<b>Hipótese refutada.</b> Ótimo: refutar também é resultado. Nós esperávamos o Sul e o Sudeste bem à frente, e não foi o que os dados mostraram.':'<b>Inconclusiva.</b> Talvez falte um dado: a RAIS não tem os informais, e a nota mede potencial, não demissão. Que dado responderia a sua pergunta?'})}
-$('#qsug').querySelectorAll('.qs').forEach(b=>b.onclick=()=>{const x=SUG[+b.dataset.i];$('#mq1').value=x[0];$('#mh1').focus();});
-$('#mgo').onclick=()=>{const q=$('#mq1').value.trim(),h=$('#mh1').value.trim();if(!q){$('#mmsg').textContent='Escreva uma pergunta ou escolha uma sugestão.';return}
-setHyp(q,h);const x=SUG.find(z=>z[0]===q);$('#mmsg').innerHTML='<b>Anotado.</b> Explore os blocos abaixo e registre a sua conclusão no bloco 8.';
-if(x){if(x[3])x[3]();document.getElementById(x[2]).scrollIntoView({behavior:'smooth'})}else document.getElementById('mapa').scrollIntoView({behavior:'smooth'})};
-
+D.cbo.forEach(c=>c.k=norm(c.t));
+$('#quf').innerHTML=opts('MT');
+const lvl=c=>c.a>=.5?['Alta','t-alta','a IA poderia fazer metade ou mais das tarefas']:c.e>=.5?['Baixa ou média','t-media','a IA poderia fazer parte das tarefas']:['Não exposta','t-nao','a IA generativa não executa as tarefas principais'];
+let PSEL=null;
+function pcard(){const c=PSEL;if(!c){$('#pcard').innerHTML='';return}const uf=$('#quf').value,l=lvl(c),nu=c.u[uf]||0;
+$('#pcard').innerHTML=`<div class="res"><h3>${c.t}</h3><div class="meta">CBO ${c.c}</div><div class="row"><div><span class="tag ${l[1]}" style="font-size:15px;padding:6px 12px">${l[0]}</span><div class="l" style="margin-top:8px">${l[2]}</div></div><div><div class="mid">${int(c.v)}</div><div class="l">vínculos no Brasil</div></div><div><div class="mid">${int(nu)}</div><div class="l">em ${D.ufs[uf].n}</div></div><div><div class="mid">${c.s?'R$ '+int(c.s):'–'}</div><div class="l">salário médio</div></div></div></div>`}
+function pickProf(c){PSEL=c;$('#q').value=c.t;pcard()}
+ac($('#q'),$('#qlist'),q=>{const w=q.split(/\s+/);return D.cbo.filter(c=>w.every(x=>c.k.includes(x))).sort((a,b)=>(b.k.startsWith(q)-a.k.startsWith(q))||b.v-a.v)},c=>`${c.t}<small>${int(c.v)} vínculos</small>`,pickProf);
+$('#quf').onchange=pcard;
+const CH=[['Vendedor','521110'],['Auxiliar de escritório','411005'],['Contador','252210'],['Motorista de caminhão','782510'],['Caixa','421125'],['Técnico de enfermagem','322205']];
+$('#chips').innerHTML=CH.map(c=>`<button class="chip" data-c="${c[1]}">${c[0]}</button>`).join('');
+$('#chips').querySelectorAll('.chip').forEach(b=>b.onclick=()=>{const c=D.cbo.find(x=>x.c===b.dataset.c);if(c)pickProf(c)});
+// perguntas
+const SUG=[['O meu estado está acima da média do Brasil?','Mapa dos estados','mapa',null],
+['A minha profissão é muito exposta?','Busca por profissão','prof',()=>setTimeout(()=>$('#q').focus(),500)],
+['O Nordeste é mais exposto que o Sul?','Bahia e Rio Grande do Sul lado a lado','comparar',()=>{$('#ca').value='BA';$('#cb').value='RS';cmp()}],
+['Como está a minha cidade?','Busca por município','mun',()=>setTimeout(()=>$('#mq').focus(),500)]];
+$('#qsug').innerHTML=SUG.map((x,i)=>`<button class="qs" data-i="${i}">${x[0]}<small>${x[1]} →</small></button>`).join('');
+$('#qsug').querySelectorAll('.qs').forEach(b=>b.onclick=()=>{const x=SUG[+b.dataset.i];if(x[3])x[3]();document.getElementById(x[2]).scrollIntoView({behavior:'smooth'})});
 // municípios
-$('#muf').innerHTML='<option value="">Todos os estados</option>'+opts('MT');$('#muf').value='MT';
-function mun(){const uf=$('#muf').value,q=norm($('#mq').value.trim()),o=$('#mord').value;
-let r=D.mun.filter(m=>(!uf||m[1]===uf)&&(!q||norm(m[0]).includes(q)));
-r.sort(o==='d'?(a,b)=>b[3]-a[3]:o==='a'?(a,b)=>a[3]-b[3]:(a,b)=>b[2]-a[2]);const tot=r.length;r=r.slice(0,60);
-$('#mtab tbody').innerHTML=r.map(m=>`<tr><td>${m[0]} <span style="color:var(--soft);font-size:12px">${m[1]}</span></td><td class="n">${int(m[2])}</td><td class="n"><b>${fmt(m[3])}%</b></td><td style="width:28%"><span class="mini" style="width:${Math.min(100,m[3]/70*100)}%"></span></td><td class="n hide-sm">${fmt(m[4])}%</td></tr>`).join('');
-$('#mnote').textContent=`Mostrando ${Math.min(60,tot)} de ${int(tot)} municípios. Média do Brasil: 35,2% expostos.`}
-['muf','mq','mord'].forEach(i=>$('#'+i)[i==='mq'?'oninput':'onchange']=mun);mun();
+D.mun.forEach(m=>m.k=norm(m[0]));
+const mrank={};for(const u in D.ufs){const l=D.mun.filter(m=>m[1]===u).sort((a,b)=>b[3]-a[3]);l.forEach((m,i)=>{m.r=i+1;m.n=l.length})}
+function pickMun(m,silent){if(!silent)$('#mq').value=`${m[0]} (${m[1]})`;const uf=D.ufs[m[1]],d=m[3]-D.br.p14;
+$('#mcard').innerHTML=`<div class="res"><h3>${m[0]}</h3><div class="meta">${uf.n} · ${int(m[2])} vínculos formais</div><div class="row"><div><div class="big">${fmt(m[3])}%</div><div class="l">em profissões expostas</div></div><div><div class="mid">${fmt(m[4])}%</div><div class="l">em alta exposição</div></div><div><div class="mid">${m.r}º de ${m.n}</div><div class="l">no estado</div></div></div><div class="vs">${d>=0?'Acima':'Abaixo'} da média do Brasil (35,2%) em ${fmt(Math.abs(d))} pontos. Média de ${uf.n}: ${fmt(uf.p14)}%.</div></div>`}
+ac($('#mq'),$('#mlist'),q=>D.mun.filter(m=>m.k.includes(q)).sort((a,b)=>(b.k.startsWith(q)-a.k.startsWith(q))||b[2]-a[2]),m=>`${m[0]}<small>${m[1]}</small>`,pickMun);
+const cba=D.mun.find(m=>m[0]==='Cuiabá');if(cba)pickMun(cba,true);
 </script>
 </body>
 </html>
